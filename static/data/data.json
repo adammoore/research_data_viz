@@ -3,15 +3,18 @@
         "tool_category_type": [
             {
                 "category": "Mind mapping, concept mapping and knowledge modelling",
-                "examples": ["Miro", "Meister Labs", "XMind"]
+                "examples": ["Miro", "Meister Labs", "XMind"],
+                "description": "Tools for conceptualizing research ideas."
             },
             {
                 "category": "Diagramming and flowchart",
-                "examples": ["Lucidchart", "Draw.io", "Creately"]
+                "examples": ["Lucidchart", "Draw.io", "Creately"],
+                "description": "Tools for creating diagrams and flowcharts."
             },
             {
                 "category": "Wireframing and prototyping",
-                "examples": ["Balsamiq", "Figma"]
+                "examples": ["Balsamiq", "Figma"],
+                "description": "Tools for wireframing and prototyping designs."
             }
         ]
     },
@@ -19,15 +22,18 @@
         "tool_category_type": [
             {
                 "category": "Data Management Planning",
-                "examples": ["DMP Tool", "DMP Online", "RDMO"]
+                "examples": ["DMP Tool", "DMP Online", "RDMO"],
+                "description": "Tools for planning data management strategies."
             },
             {
                 "category": "Project Planning",
-                "examples": ["Trello", "Asana", "Microsoft Project"]
+                "examples": ["Trello", "Asana", "Microsoft Project"],
+                "description": "Tools for planning and managing projects."
             },
             {
                 "category": "Combined DMP/Project",
-                "examples": ["Data Stewardship Wizard", "Redbox Research Data", "Argos"]
+                "examples": ["Data Stewardship Wizard", "Redbox Research Data", "Argos"],
+                "description": "Tools combining data management and project planning."
             }
         ]
     },
@@ -35,15 +41,18 @@
         "tool_category_type": [
             {
                 "category": "Quantitative Data Collection Tools",
-                "examples": ["Open Data Kit", "GBIF", "Cedar Worklabs"]
+                "examples": ["Open Data Kit", "GBIF", "Cedar Worklabs"],
+                "description": "Tools for collecting quantitative data."
             },
             {
                 "category": "Qualitative Data Collection Tools",
-                "examples": ["SurveyMonkey", "Online Surveys", "Zooniverse"]
+                "examples": ["SurveyMonkey", "Online Surveys", "Zooniverse"],
+                "description": "Tools for collecting qualitative data."
             },
             {
                 "category": "Harvesting Tool (e.g. Webscrapers)",
-                "examples": ["Netlytic", "IRODS", "DROID"]
+                "examples": ["Netlytic", "IRODS", "DROID"],
+                "description": "Tools for harvesting data from various sources."
             }
         ]
     },
@@ -51,15 +60,18 @@
         "tool_category_type": [
             {
                 "category": "Electronic Lab Notebooks (ELNs)",
-                "examples": ["elabnext", "Lab archives", "RSpace"]
+                "examples": ["elabnext", "Lab archives", "RSpace"],
+                "description": "Electronic lab notebooks for data documentation."
             },
             {
                 "category": "Scientific Computing (Across all languages)",
-                "examples": ["Jupyter", "Mathematica", "WebAssembly"]
+                "examples": ["Jupyter", "Mathematica", "WebAssembly"],
+                "description": "Tools for scientific computing across various programming languages."
             },
             {
                 "category": "Metadata Tools",
-                "examples": ["CEDAR Workbench (biomedical data)"]
+                "examples": ["CEDAR Workbench (biomedical data)"],
+                "description": "Tools for managing and processing metadata."
             }
         ]
     },
@@ -67,15 +79,18 @@
         "tool_category_type": [
             {
                 "category": "Remediation (e.g. motion capture for gait analysis)",
-                "examples": ["Track3D"]
+                "examples": ["Track3D"],
+                "description": "Tools for remediation tasks like motion capture analysis."
             },
             {
                 "category": "Computational methods (e.g. Statistical software)",
-                "examples": ["SPSS", "Matlab"]
+                "examples": ["SPSS", "Matlab"],
+                "description": "Statistical software for computational methods."
             },
             {
                 "category": "Computational Tools",
-                "examples": ["Jupyter", "RStudio", "Eclipse"]
+                "examples": ["Jupyter", "RStudio", "Eclipse"],
+                "description": "Tools for computational work and software development."
             }
         ]
     },
@@ -83,15 +98,18 @@
         "tool_category_type": [
             {
                 "category": "Data Repository",
-                "examples": ["Figshare", "Zenodo", "Dataverse"]
+                "examples": ["Figshare", "Zenodo", "Dataverse"],
+                "description": "Repositories for storing research data."
             },
             {
                 "category": "Archive",
-                "examples": ["Libsafe"]
+                "examples": ["Libsafe"],
+                "description": "Tools for archiving research data."
             },
             {
                 "category": "Management Tools",
-                "examples": ["iRODS", "GLOBUS", "Mediaflux"]
+                "examples": ["iRODS", "GLOBUS", "Mediaflux"],
+                "description": "Tools for managing and transferring research data."
             }
         ]
     },
@@ -99,15 +117,18 @@
         "tool_category_type": [
             {
                 "category": "Discipline-specific Data Repository",
-                "examples": ["NOMAD-OASIS", "Global Biodiversity Information Facility (GBIF)", "Data Station Social Sciences and Humanities"]
+                "examples": ["NOMAD-OASIS", "Global Biodiversity Information Facility (GBIF)", "Data Station Social Sciences and Humanities"],
+                "description": "Repositories for specific research disciplines."
             },
             {
                 "category": "Generalist Data Repository",
-                "examples": ["Figshare", "CKAN", "Zenodo", "Dataverse"]
+                "examples": ["Figshare", "CKAN", "Zenodo", "Dataverse"],
+                "description": "General-purpose repositories for publishing research data."
             },
             {
                 "category": "Metadata Repository",
-                "examples": ["DataCite Commons", "IBM Infosphere"]
+                "examples": ["DataCite Commons", "IBM Infosphere"],
+                "description": "Repositories for storing and sharing metadata."
             }
         ]
     },
@@ -115,15 +136,18 @@
         "tool_category_type": [
             {
                 "category": "Data Repository",
-                "examples": ["Dataverse", "Invenio", "UKDS (National/Regional/Disciplinary Archive)"]
+                "examples": ["Dataverse", "Invenio", "UKDS (National/Regional/Disciplinary Archive)"],
+                "description": "Repositories for long-term preservation of research data."
             },
             {
                 "category": "Archive",
-                "examples": ["Archivematica"]
+                "examples": ["Archivematica"],
+                "description": "Archiving tools for preserving research data."
             },
             {
                 "category": "Containers",
-                "examples": ["Preservica", "Docker", "Archive-It.org"]
+                "examples": ["Preservica", "Docker", "Archive-It.org"],
+                "description": "Tools for containerizing and preserving research workflows and data."
             }
         ]
     },
@@ -131,15 +155,18 @@
         "tool_category_type": [
             {
                 "category": "Data Repository",
-                "examples": ["Dataverse", "Zenodo", "Figshare"]
+                "examples": ["Dataverse", "Zenodo", "Figshare"],
+                "description": "Platforms for sharing research data with the community."
             },
             {
                 "category": "Electronic Lab Notebooks (ELNs)",
-                "examples": ["elabftw", "elabnext", "Lab archives"]
+                "examples": ["elabftw", "elabnext", "Lab archives"],
+                "description": "Electronic lab notebooks that facilitate sharing and collaboration."
             },
             {
                 "category": "Scientific Computing (Across all languages)",
-                "examples": ["Eclipse", "Jupyter", "Wolfram Alpha"]
+                "examples": ["Eclipse", "Jupyter", "Wolfram Alpha"],
+                "description": "Tools for scientific computing that support sharing of computational workflows."
             }
         ]
     },
@@ -147,15 +174,18 @@
         "tool_category_type": [
             {
                 "category": "Data Repository",
-                "examples": ["CKAN", "Dataverse", "Dryad"]
+                "examples": ["CKAN", "Dataverse", "Dryad"],
+                "description": "Repositories providing access to research data."
             },
             {
                 "category": "Database",
-                "examples": ["Oracle", "MySQL/SQL Lite", "Postgres"]
+                "examples": ["Oracle", "MySQL/SQL Lite", "Postgres"],
+                "description": "Databases for storing and accessing structured research data."
             },
             {
                 "category": "Authorisation/Authentication Infrastructure",
-                "examples": ["LDAP", "SAML2", "AD"]
+                "examples": ["LDAP", "SAML2", "AD"],
+                "description": "Infrastructure for securing access to research data."
             }
         ]
     },
@@ -163,17 +193,19 @@
         "tool_category_type": [
             {
                 "category": "Electronic Lab Notebooks (ELNs)",
-                "examples": ["elabftw", "RSpace", "elabnext", "Lab archives"]
+                "examples": ["elabftw", "RSpace", "elabnext", "Lab archives"],
+                "description": "ELNs that support data transformation and analysis."
             },
             {
                 "category": "Programming Languages",
-                "examples": ["Python (Interpreted Language)", "Perl (4GL)", "Fortran (Compiled Language)"]
+                "examples": ["Python (Interpreted Language)", "Perl (4GL)", "Fortran (Compiled Language)"],
+                "description": "Programming languages used for data transformation and analysis."
             },
             {
                 "category": "Extract, Transform, Load (ETL) tools",
-                "examples": ["OCI (Cloud Infrastructure Provider)", "Apache Spark", "Snowflake (Commercial)"]
+                "examples": ["OCI (Cloud Infrastructure Provider)", "Apache Spark", "Snowflake (Commercial)"],
+                "description": "ETL tools for transforming and preparing data for analysis."
             }
         ]
     }
 }
-

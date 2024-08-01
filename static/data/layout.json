@@ -1,84 +1,17 @@
 {
     "stages": [
-        {
-            "name": "Conceptualise",
-            "x": 200,
-            "y": 100,
-            "next": "Plan"
-        },
-        {
-            "name": "Plan",
-            "x": 400,
-            "y": 100,
-            "next": "Collect"
-        },
-        {
-            "name": "Collect",
-            "x": 600,
-            "y": 100,
-            "next": "Process"
-        },
-        {
-            "name": "Process",
-            "x": 800,
-            "y": 100,
-            "next": "Analyse"
-        },
-        {
-            "name": "Analyse",
-            "x": 1000,
-            "y": 100,
-            "next": "Store"
-        },
-        {
-            "name": "Store",
-            "x": 1200,
-            "y": 100,
-            "next": "Publish"
-        },
-        {
-            "name": "Publish",
-            "x": 1000,
-            "y": 300,
-            "next": "Preserve"
-        },
-        {
-            "name": "Preserve",
-            "x": 800,
-            "y": 300,
-            "next": "Share"
-        },
-        {
-            "name": "Share",
-            "x": 600,
-            "y": 300,
-            "next": "Access"
-        },
-        {
-            "name": "Access",
-            "x": 400,
-            "y": 300,
-            "next": "Transform"
-        },
-        {
-            "name": "Transform",
-            "x": 200,
-            "y": 300,
-            "next": "Conceptualise"
-        }
-    ],
-    "connections": [
-        { "from": "Conceptualise", "to": "Plan" },
-        { "from": "Plan", "to": "Collect" },
-        { "from": "Collect", "to": "Process" },
-        { "from": "Process", "to": "Analyse" },
-        { "from": "Analyse", "to": "Store" },
-        { "from": "Store", "to": "Publish" },
-        { "from": "Publish", "to": "Preserve" },
-        { "from": "Preserve", "to": "Share" },
-        { "from": "Share", "to": "Access" },
-        { "from": "Access", "to": "Transform" },
-        { "from": "Transform", "to": "Conceptualise" }
+        { "name": "FUND", "connections": [{ "type": "solid", "to": "Conceptualise" }] },
+        { "name": "Conceptualise", "connections": [{ "type": "solid", "to": "Planning" }] },
+        { "name": "Planning", "connections": [{ "type": "solid", "to": "Collect" }] },
+        { "name": "Collect", "connections": [{ "type": "solid", "to": "Process" }] },
+        { "name": "Process", "connections": [{ "type": "solid", "to": "Analyse" }, { "type": "dashed", "to": "Store" }] },
+        { "name": "Analyse", "connections": [{ "type": "solid", "to": "Store" }] },
+        { "name": "Store", "connections": [{ "type": "solid", "to": "Publish" }] },
+        { "name": "Publish", "connections": [{ "type": "solid", "to": "Preserve" }] },
+        { "name": "Preserve", "connections": [{ "type": "solid", "to": "Share" }] },
+        { "name": "Share", "connections": [{ "type": "solid", "to": "Access" }] },
+        { "name": "Access", "connections": [{ "type": "solid", "to": "Transform" }] },
+        { "name": "Transform", "connections": [{ "type": "solid", "to": "Conceptualise" }] }
     ]
 }
 
