@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         stageGroup.on('click', function() {
             const stageData = data[stage.name];
-            toggleTools(stageData, stageGroup);
+            toggleTools(stageData, stageGroup, stage.name);
         });
     });
 
@@ -87,17 +87,26 @@ document.addEventListener('DOMContentLoaded', function() {
        .attr('d', 'M 0 0 L 10 5 L 0 10 z')
        .attr('fill', 'black');
 
-    // Render substages and exemplars dynamically from data.json
-    Object.keys(data).forEach(stageName => {
-        const stageData = data[stageName];
-        const parentStage = layout.stages.find(s => s.name === stageName);
-        if (parentStage) {
+    function toggleTools(stageData, stageGroup, stageName) {
+        if (!stageData || !stageData.tool_category_type) {
+            console.error('No tool category data found for this stage.');
+            return;
+        }
+
+        const isExpanded = stageGroup.select('.tool-group').size() > 0;
+
+        if (isExpanded) {
+            // Hide substages and exemplars
+            stageGroup.selectAll('.tool-group').remove();
+            svg.selectAll(`.connection-${stageName}`).remove();
+        } else {
+            // Show substages and exemplars
             stageData.tool_category_type.forEach((category, index) => {
-                const substageX = parentStage.x + 150;
-                const substageY = parentStage.y + (index * 70) - 35;
+                const substageX = stageGroup.attr('transform').match(/translate\(([^)]+)\)/)[1].split(',')[0] * 1 + 150;
+                const substageY = stageGroup.attr('transform').match(/translate\(([^)]+)\)/)[1].split(',')[1] * 1 + (index * 70) - 35;
 
                 const substageGroup = svg.append('g')
-                    .attr('class', 'substage-group')
+                    .attr('class', `tool-group connection-${stageName}`)
                     .attr('transform', `translate(${substageX},${substageY})`);
 
                 substageGroup.append('rect')
@@ -116,23 +125,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     .attr('font-size', '14px')
                     .attr('fill', 'black');
 
-                // Render connections from the parent stage to the substage
+                // Render connection from stage to substage
                 svg.append('line')
-                    .attr('x1', parentStage.x + 100)
-                    .attr('y1', parentStage.y + 25)
+                    .attr('x1', stageGroup.attr('transform').match(/translate\(([^)]+)\)/)[1].split(',')[0] * 1 + 100)
+                    .attr('y1', stageGroup.attr('transform').match(/translate\(([^)]+)\)/)[1].split(',')[1] * 1 + 25)
                     .attr('x2', substageX)
                     .attr('y2', substageY + 25)
                     .attr('stroke', 'black')
                     .attr('stroke-width', 2)
-                    .attr('marker-end', 'url(#arrow)');
+                    .attr('marker-end', 'url(#arrow)')
+                    .attr('class', `connection-${stageName}`);
 
-                // Render exemplars (if any)
                 category.examples.forEach((example, i) => {
-                    const exampleX = substageX + 220;
+                    const exampleX = substageX + 240;
                     const exampleY = substageY + (i * 60);
 
                     const exampleGroup = svg.append('g')
-                        .attr('class', 'example-group')
+                        .attr('class', `example-group connection-${stageName}`)
                         .attr('transform', `translate(${exampleX},${exampleY})`);
 
                     exampleGroup.append('rect')
@@ -151,7 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         .attr('font-size', '12px')
                         .attr('fill', 'black');
 
-                    // Render connections from substage to exemplar
                     svg.append('line')
                         .attr('x1', substageX + 200)
                         .attr('y1', substageY + 25)
@@ -159,79 +167,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         .attr('y2', exampleY + 25)
                         .attr('stroke', 'black')
                         .attr('stroke-width', 2)
-                        .attr('marker-end', 'url(#arrow)');
+                        .attr('marker-end', 'url(#arrow)')
+                        .attr('class', `connection-${stageName}`);
                 });
             });
         }
-    });
-
-    // Reset view button
-    d3.select('#reset-view').on('click', function() {
-        resetView();
-    });
-
-    // Expand all substages
-    d3.select('#expand-all').on('click', function() {
-        layout.stages.forEach(stage => {
-            const stageGroup = svg.selectAll('.stage-group')
-                                  .filter(function(d) {
-                                      return d3.select(this).select('text').text() === stage.name;
-                                  });
-            const stageData = data[stage.name];
-            toggleTools(stageData, stageGroup);
-        });
-    });
-
-    // Switch to linear view
-    d3.select('#view-mode').on('change', function() {
-        const viewMode = d3.select(this).property('value');
-        if (viewMode === 'linear') {
-            switchToLinearView();
-        } else {
-            resetView();
-        }
-    });
-
-    function toggleTools(stageData, stageGroup) {
-        // Toggles tools visibility
-        if (!stageData || !stageData.tool_category_type) {
-            console.error('No tool category data found for this stage.');
-            return;
-        }
-
-        const toolGroup = stageGroup.selectAll('.tool-group').data(stageData.tool_category_type);
-
-        const toolEnter = toolGroup.enter().append('g')
-            .attr('class', 'tool-group')
-            .attr('transform', function(d, i) {
-                return `translate(120, ${i * 60})`;
-            });
-
-        toolEnter.append('rect')
-            .attr('width', 300)
-            .attr('height', 50)
-            .attr('fill', 'lightgray')
-            .attr('stroke', 'black')
-            .attr('stroke-width', 2);
-
-        toolEnter.append('text')
-            .attr('x', 150)
-            .attr('y', 25)
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .text(d => d.category)
-            .attr('font-size', '14px')
-            .attr('fill', 'black');
-
-        toolEnter.on('mouseover', function (d) {
-            d3.select(this).select('rect').attr('fill', 'lightblue');
-            showTooltip(d.description);
-        }).on('mouseout', function () {
-            d3.select(this).select('rect').attr('fill', 'lightgray');
-            hideTooltip();
-        });
-
-        toolGroup.exit().remove();
     }
 
     function showTooltip(description) {
@@ -256,6 +196,25 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideTooltip() {
         d3.select('.tooltip').remove();
     }
+
+    // Reset view button
+    d3.select('#reset-view').on('click', function() {
+        svg.selectAll('*').remove();
+        // Re-render the initial layout
+        resetView();
+    });
+
+    // Expand all substages
+    d3.select('#expand-all').on('click', function() {
+        layout.stages.forEach(stage => {
+            const stageGroup = svg.selectAll('.stage-group')
+                                  .filter(function() {
+                                      return d3.select(this).select('text').text() === stage.name;
+                                  });
+            const stageData = data[stage.name];
+            toggleTools(stageData, stageGroup, stage.name);
+        });
+    });
 
     function resetView() {
         svg.selectAll('*').remove();
@@ -291,85 +250,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
             stageGroup.on('click', function() {
                 const stageData = data[stage.name];
-                toggleTools(stageData, stageGroup);
+                toggleTools(stageData, stageGroup, stage.name);
             });
         });
 
-        // Re-render the substages and exemplars
-        Object.keys(data).forEach(stageName => {
-            const stageData = data[stageName];
-            const parentStage = layout.stages.find(s => s.name === stageName);
-            if (parentStage) {
-                stageData.tool_category_type.forEach((category, index) => {
-                    const substageX = parentStage.x + 150;
-                    const substageY = parentStage.y + (index * 70) - 35;
+        // Render connections between stages
+        layout.stages.forEach(stage => {
+            stage.connections.forEach(connection => {
+                const toStage = layout.stages.find(s => s.name === connection.to);
 
-                    const substageGroup = svg.append('g')
-                        .attr('class', 'substage-group')
-                        .attr('transform', `translate(${substageX},${substageY})`);
-
-                    substageGroup.append('rect')
-                        .attr('width', 200)
-                        .attr('height', 50)
-                        .attr('fill', 'lightgray')
-                        .attr('stroke', 'black')
-                        .attr('stroke-width', 2);
-
-                    substageGroup.append('text')
-                        .attr('x', 100)
-                        .attr('y', 25)
-                        .attr('text-anchor', 'middle')
-                        .attr('dominant-baseline', 'middle')
-                        .text(category.category)
-                        .attr('font-size', '14px')
-                        .attr('fill', 'black');
-
+                if (toStage) {
                     svg.append('line')
-                        .attr('x1', parentStage.x + 100)
-                        .attr('y1', parentStage.y + 25)
-                        .attr('x2', substageX)
-                        .attr('y2', substageY + 25)
-                        .attr('stroke', 'black')
-                        .attr('stroke-width', 2)
-                        .attr('marker-end', 'url(#arrow)');
-
-                    category.examples.forEach((example, i) => {
-                        const exampleX = substageX + 220;
-                        const exampleY = substageY + (i * 60);
-
-                        const exampleGroup = svg.append('g')
-                            .attr('class', 'example-group')
-                            .attr('transform', `translate(${exampleX},${exampleY})`);
-
-                        exampleGroup.append('rect')
-                            .attr('width', 150)
-                            .attr('height', 50)
-                            .attr('fill', 'lightblue')
-                            .attr('stroke', 'black')
-                            .attr('stroke-width', 2);
-
-                        exampleGroup.append('text')
-                            .attr('x', 75)
-                            .attr('y', 25)
-                            .attr('text-anchor', 'middle')
-                            .attr('dominant-baseline', 'middle')
-                            .text(example)
-                            .attr('font-size', '12px')
-                            .attr('fill', 'black');
-
-                        svg.append('line')
-                            .attr('x1', substageX + 200)
-                            .attr('y1', substageY + 25)
-                            .attr('x2', exampleX)
-                            .attr('y2', exampleY + 25)
-                            .attr('stroke', 'black')
-                            .attr('stroke-width', 2)
-                            .attr('marker-end', 'url(#arrow)');
-                    });
-                });
-            }
+                       .attr('x1', stage.x + 50)
+                       .attr('y1', stage.y + 25)
+                       .attr('x2', toStage.x + 50)
+                       .attr('y2', toStage.y + 25)
+                       .attr('stroke', 'black')
+                       .attr('stroke-width', 2)
+                       .attr('marker-end', 'url(#arrow)')
+                       .attr('stroke-dasharray', connection.type === 'dashed' ? '4,4' : '0');
+                }
+            });
         });
+
+        // Add arrow markers for connections
+        svg.append('defs').append('marker')
+           .attr('id', 'arrow')
+           .attr('viewBox', '0 0 10 10')
+           .attr('refX', 10)
+           .attr('refY', 5)
+           .attr('markerWidth', 6)
+           .attr('markerHeight', 6)
+           .attr('orient', 'auto')
+           .append('path')
+           .attr('d', 'M 0 0 L 10 5 L 0 10 z')
+           .attr('fill', 'black');
     }
+
+    // Switch to linear view
+    d3.select('#view-mode').on('change', function() {
+        const viewMode = d3.select(this).property('value');
+        if (viewMode === 'linear') {
+            switchToLinearView();
+        } else {
+            resetView();
+        }
+    });
 
     function switchToLinearView() {
         svg.selectAll('*').remove();
@@ -423,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             stageGroup.on('click', function() {
                 const stageData = data[stage.name];
-                toggleTools(stageData, stageGroup);
+                toggleTools(stageData, stageGroup, stage.name);
             });
         });
 
@@ -437,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const substageY = parentStage.y + (index * 70) - 35;
 
                     const substageGroup = svg.append('g')
-                        .attr('class', 'substage-group')
+                        .attr('class', `tool-group connection-${stageName}`)
                         .attr('transform', `translate(${substageX},${substageY})`);
 
                     substageGroup.append('rect')
@@ -463,14 +389,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         .attr('y2', substageY + 25)
                         .attr('stroke', 'black')
                         .attr('stroke-width', 2)
-                        .attr('marker-end', 'url(#arrow)');
+                        .attr('marker-end', 'url(#arrow)')
+                        .attr('class', `connection-${stageName}`);
 
                     category.examples.forEach((example, i) => {
                         const exampleX = substageX + 240;
                         const exampleY = substageY + (i * 60);
 
                         const exampleGroup = svg.append('g')
-                            .attr('class', 'example-group')
+                            .attr('class', `example-group connection-${stageName}`)
                             .attr('transform', `translate(${exampleX},${exampleY})`);
 
                         exampleGroup.append('rect')
@@ -496,7 +423,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             .attr('y2', exampleY + 25)
                             .attr('stroke', 'black')
                             .attr('stroke-width', 2)
-                            .attr('marker-end', 'url(#arrow)');
+                            .attr('marker-end', 'url(#arrow)')
+                            .attr('class', `connection-${stageName}`);
                     });
                 });
             }
