@@ -1,0 +1,179 @@
+{
+    "Conceptualise": {
+        "tool_category_type": [
+            {
+                "category": "Mind mapping, concept mapping and knowledge modelling",
+                "examples": ["Miro", "Meister Labs", "XMind"]
+            },
+            {
+                "category": "Diagramming and flowchart",
+                "examples": ["Lucidchart", "Draw.io", "Creately"]
+            },
+            {
+                "category": "Wireframing and prototyping",
+                "examples": ["Balsamiq", "Figma"]
+            }
+        ]
+    },
+    "Plan": {
+        "tool_category_type": [
+            {
+                "category": "Data Management Planning",
+                "examples": ["DMP Tool", "DMP Online", "RDMO"]
+            },
+            {
+                "category": "Project Planning",
+                "examples": ["Trello", "Asana", "Microsoft Project"]
+            },
+            {
+                "category": "Combined DMP/Project",
+                "examples": ["Data Stewardship Wizard", "Redbox Research Data", "Argos"]
+            }
+        ]
+    },
+    "Collect": {
+        "tool_category_type": [
+            {
+                "category": "Quantitative Data Collection Tools",
+                "examples": ["Open Data Kit", "GBIF", "Cedar Worklabs"]
+            },
+            {
+                "category": "Qualitative Data Collection Tools",
+                "examples": ["SurveyMonkey", "Online Surveys", "Zooniverse"]
+            },
+            {
+                "category": "Harvesting Tool (e.g. Webscrapers)",
+                "examples": ["Netlytic", "IRODS", "DROID"]
+            }
+        ]
+    },
+    "Process": {
+        "tool_category_type": [
+            {
+                "category": "Electronic Lab Notebooks (ELNs)",
+                "examples": ["elabnext", "Lab archives", "RSpace"]
+            },
+            {
+                "category": "Scientific Computing (Across all languages)",
+                "examples": ["Jupyter", "Mathematica", "WebAssembly"]
+            },
+            {
+                "category": "Metadata Tools",
+                "examples": ["CEDAR Workbench (biomedical data)"]
+            }
+        ]
+    },
+    "Analyse": {
+        "tool_category_type": [
+            {
+                "category": "Remediation (e.g. motion capture for gait analysis)",
+                "examples": ["Track3D"]
+            },
+            {
+                "category": "Computational methods (e.g. Statistical software)",
+                "examples": ["SPSS", "Matlab"]
+            },
+            {
+                "category": "Computational Tools",
+                "examples": ["Jupyter", "RStudio", "Eclipse"]
+            }
+        ]
+    },
+    "Store": {
+        "tool_category_type": [
+            {
+                "category": "Data Repository",
+                "examples": ["Figshare", "Zenodo", "Dataverse"]
+            },
+            {
+                "category": "Archive",
+                "examples": ["Libsafe"]
+            },
+            {
+                "category": "Management Tools",
+                "examples": ["iRODS", "GLOBUS", "Mediaflux"]
+            }
+        ]
+    },
+    "Publish": {
+        "tool_category_type": [
+            {
+                "category": "Discipline-specific Data Repository",
+                "examples": ["NOMAD-OASIS", "Global Biodiversity Information Facility (GBIF)", "Data Station Social Sciences and Humanities"]
+            },
+            {
+                "category": "Generalist Data Repository",
+                "examples": ["Figshare", "CKAN", "Zenodo", "Dataverse"]
+            },
+            {
+                "category": "Metadata Repository",
+                "examples": ["DataCite Commons", "IBM Infosphere"]
+            }
+        ]
+    },
+    "Preserve": {
+        "tool_category_type": [
+            {
+                "category": "Data Repository",
+                "examples": ["Dataverse", "Invenio", "UKDS (National/Regional/Disciplinary Archive)"]
+            },
+            {
+                "category": "Archive",
+                "examples": ["Archivematica"]
+            },
+            {
+                "category": "Containers",
+                "examples": ["Preservica", "Docker", "Archive-It.org"]
+            }
+        ]
+    },
+    "Share": {
+        "tool_category_type": [
+            {
+                "category": "Data Repository",
+                "examples": ["Dataverse", "Zenodo", "Figshare"]
+            },
+            {
+                "category": "Electronic Lab Notebooks (ELNs)",
+                "examples": ["elabftw", "elabnext", "Lab archives"]
+            },
+            {
+                "category": "Scientific Computing (Across all languages)",
+                "examples": ["Eclipse", "Jupyter", "Wolfram Alpha"]
+            }
+        ]
+    },
+    "Access": {
+        "tool_category_type": [
+            {
+                "category": "Data Repository",
+                "examples": ["CKAN", "Dataverse", "Dryad"]
+            },
+            {
+                "category": "Database",
+                "examples": ["Oracle", "MySQL/SQL Lite", "Postgres"]
+            },
+            {
+                "category": "Authorisation/Authentication Infrastructure",
+                "examples": ["LDAP", "SAML2", "AD"]
+            }
+        ]
+    },
+    "Transform": {
+        "tool_category_type": [
+            {
+                "category": "Electronic Lab Notebooks (ELNs)",
+                "examples": ["elabftw", "RSpace", "elabnext", "Lab archives"]
+            },
+            {
+                "category": "Programming Languages",
+                "examples": ["Python (Interpreted Language)", "Perl (4GL)", "Fortran (Compiled Language)"]
+            },
+            {
+                "category": "Extract, Transform, Load (ETL) tools",
+                "examples": ["OCI (Cloud Infrastructure Provider)", "Apache Spark", "Snowflake (Commercial)"]
+            }
+        ]
+    }
+}
+
