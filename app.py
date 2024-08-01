@@ -1,17 +1,17 @@
 from flask import Flask, render_template, jsonify, request
 import json
-import os
+from layout_calculator import calculate_positions, linear_positions
 
 app = Flask(__name__)
 
 # Utility function to load JSON data
 def load_json(file_name):
-    with open(os.path.join(app.static_folder, 'data', file_name), 'r') as file:
+    with open(f'static/data/{file_name}', 'r') as file:
         return json.load(file)
 
 # Utility function to save JSON data
 def save_json(file_name, data):
-    with open(os.path.join(app.static_folder, 'data', file_name), 'w') as file:
+    with open(f'static/data/{file_name}', 'w') as file:
         json.dump(data, file, indent=4)
 
 @app.route('/')
@@ -19,6 +19,17 @@ def index():
     layout = load_json('layout.json')
     data = load_json('data.json')
     return render_template('index.html', layout=layout, data=data)
+
+@app.route('/api/layout/<view_mode>', methods=['GET'])
+def get_layout(view_mode):
+    layout = load_json('layout.json')
+    
+    if view_mode == 'circular':
+        layout = calculate_positions(layout)
+    elif view_mode == 'linear':
+        layout = linear_positions(layout)
+
+    return jsonify(layout)
 
 # API Endpoint to retrieve data
 @app.route('/api/data', methods=['GET'])

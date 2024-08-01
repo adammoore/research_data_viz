@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MaLDReTH Research Data Lifecycle</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <h1>MaLDReTH Research Data Lifecycle</h1>
+    <div class="header">
+        <h1>MaLDReTH Research Data Lifecycle</h1>
+        <p>The MaLDReTH Research Data Lifecycle visualizes the various stages involved in research data management...</p>
+        <a href="https://www.rd-alliance.org/groups/mapping-landscape-digital-research-tools-working-group" target="_blank">Learn more about Mapping the Research Data Landscape</a>
+    </div>
+
     <div id="controls">
         <select id="view-mode">
             <option value="circular">Circular View</option>
@@ -16,22 +22,10 @@
         <button id="reset-view">Reset View</button>
         <button id="expand-all">Expand All</button>
     </div>
-    <div id="explanation">
-        <p>The MaLDReTH Research Data Lifecycle visualizes the various stages involved in research data management...</p>
-        <a href="https://www.rd-alliance.org/" target="_blank">Learn more about Mapping the Research Data Landscape</a>
-    </div>
+
     <div id="visualization"></div>
 
-    <!-- Include D3.js before your custom script -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-
-    <!-- Embed the layout and data into the JavaScript context -->
-    <script type="text/javascript">
-        var layout = {{ layout | tojson | safe }};
-        var data = {{ data | tojson | safe }};
-    </script>
-
-    <script src="{{ url_for('static', filename='js/visualization.js') }}"></script>
+    <script src="/static/js/visualization.js"></script>
 </body>
 </html>
 
