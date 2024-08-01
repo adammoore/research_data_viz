@@ -4,7 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
                   .attr('width', 1200)
                   .attr('height', 800);
 
+    let currentViewMode = 'circular';
+
     function renderView(viewMode) {
+        currentViewMode = viewMode;
         d3.json(`/api/layout/${viewMode}`).then(layoutData => {
             svg.selectAll('*').remove();
             drawStages(layoutData.stages);
@@ -36,6 +39,54 @@ document.addEventListener('DOMContentLoaded', function() {
                 .text(stage.name)
                 .attr('font-size', '14px')
                 .attr('fill', 'black');
+
+            if (stage.tool_category_type) {
+                stage.tool_category_type.forEach((substage, index) => {
+                    const subStageGroup = svg.append('g')
+                        .attr('class', `substage-group ${stage.name}`)
+                        .attr('transform', `translate(${substage.x},${substage.y})`)
+                        .style('display', 'none'); // Initially hidden
+
+                    subStageGroup.append('rect')
+                        .attr('width', 150)
+                        .attr('height', 30)
+                        .attr('fill', 'lightgrey')
+                        .attr('stroke', 'black')
+                        .attr('stroke-width', 1);
+
+                    subStageGroup.append('text')
+                        .attr('x', 75)
+                        .attr('y', 15)
+                        .attr('text-anchor', 'middle')
+                        .attr('dominant-baseline', 'middle')
+                        .text(substage.category)
+                        .attr('font-size', '12px')
+                        .attr('fill', 'black');
+
+                    substage.examples.forEach((example, subindex) => {
+                        const exampleGroup = svg.append('g')
+                            .attr('class', `example-group ${stage.name}`)
+                            .attr('transform', `translate(${substage.x + 200},${substage.y + subindex * 40})`)
+                            .style('display', 'none'); // Initially hidden
+
+                        exampleGroup.append('rect')
+                            .attr('width', 100)
+                            .attr('height', 30)
+                            .attr('fill', 'lightblue')
+                            .attr('stroke', 'black')
+                            .attr('stroke-width', 1);
+
+                        exampleGroup.append('text')
+                            .attr('x', 50)
+                            .attr('y', 15)
+                            .attr('text-anchor', 'middle')
+                            .attr('dominant-baseline', 'middle')
+                            .text(example)
+                            .attr('font-size', '12px')
+                            .attr('fill', 'black');
+                    });
+                });
+            }
         });
     }
 
@@ -71,12 +122,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function toggleStage(stageName) {
-        // Toggle visibility of substages and exemplars
+        const isVisible = svg.selectAll(`.substage-group.${stageName}`).style('display') === 'none';
+
+        svg.selectAll(`.substage-group.${stageName}`).style('display', isVisible ? 'block' : 'none');
+        svg.selectAll(`.example-group.${stageName}`).style('display', isVisible ? 'block' : 'none');
     }
 
     document.getElementById('view-mode').addEventListener('change', function() {
         const viewMode = this.value;
         renderView(viewMode);
+    });
+
+    document.getElementById('reset-view').addEventListener('click', function() {
+        renderView(currentViewMode);
+    });
+
+    document.getElementById('expand-all').addEventListener('click', function() {
+        svg.selectAll('.substage-group, .example-group').style('display', 'block');
     });
 
     // Initial rendering based on the selected view mode
