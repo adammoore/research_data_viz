@@ -122,10 +122,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function toggleStage(stageName) {
-        const isVisible = svg.selectAll(`.substage-group.${stageName}`).style('display') === 'none';
+        // Select substages and examples related to the stage
+        const subStages = svg.selectAll(`.substage-group.${stageName}`);
+        const examples = svg.selectAll(`.example-group.${stageName}`);
 
-        svg.selectAll(`.substage-group.${stageName}`).style('display', isVisible ? 'block' : 'none');
-        svg.selectAll(`.example-group.${stageName}`).style('display', isVisible ? 'block' : 'none');
+        // Check if any substage is found
+        if (!subStages.empty() && !examples.empty()) {
+            const isVisible = subStages.style('display') === 'none';
+            subStages.style('display', isVisible ? 'block' : 'none');
+            examples.style('display', isVisible ? 'block' : 'none');
+        }
     }
 
     document.getElementById('view-mode').addEventListener('change', function() {
