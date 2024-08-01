@@ -1,17 +1,35 @@
 {
-    "stages": [
-        { "name": "FUND", "connections": [{ "type": "solid", "to": "Conceptualise" }] },
-        { "name": "Conceptualise", "connections": [{ "type": "solid", "to": "Planning" }] },
-        { "name": "Planning", "connections": [{ "type": "solid", "to": "Collect" }] },
-        { "name": "Collect", "connections": [{ "type": "solid", "to": "Process" }] },
-        { "name": "Process", "connections": [{ "type": "solid", "to": "Analyse" }, { "type": "dashed", "to": "Store" }] },
-        { "name": "Analyse", "connections": [{ "type": "solid", "to": "Store" }] },
-        { "name": "Store", "connections": [{ "type": "solid", "to": "Publish" }] },
-        { "name": "Publish", "connections": [{ "type": "solid", "to": "Preserve" }] },
-        { "name": "Preserve", "connections": [{ "type": "solid", "to": "Share" }] },
-        { "name": "Share", "connections": [{ "type": "solid", "to": "Access" }] },
-        { "name": "Access", "connections": [{ "type": "solid", "to": "Transform" }] },
-        { "name": "Transform", "connections": [{ "type": "solid", "to": "Conceptualise" }] }
-    ]
+  "stages": [
+    {"name": "Fund"},
+    {"name": "Planning"},
+    {"name": "Conceptualise"},
+    {"name": "Collect"},
+    {"name": "Process"},
+    {"name": "Analyse"},
+    {"name": "Store"},
+    {"name": "Publish"},
+    {"name": "Preserve"},
+    {"name": "Share"},
+    {"name": "Access"},
+    {"name": "Transform"}
+  ],
+  "connections": [
+    {"from": "Fund", "to": "Planning", "type": "solid"},
+    {"from": "Planning", "to": "Collect", "type": "solid"},
+    {"from": "Fund", "to": "Conceptualise", "type": "solid"},
+    {"from": "Conceptualise", "to": "Planning", "type": "solid"},
+    {"from": "Collect", "to": "Process", "type": "solid"},
+    {"from": "Process", "to": "Analyse", "type": "solid"},
+    {"from": "Analyse", "to": "Store", "type": "solid"},
+    {"from": "Store", "to": "Publish", "type": "solid"},
+    {"from": "Publish", "to": "Preserve", "type": "solid"},
+    {"from": "Preserve", "to": "Share", "type": "solid"},
+    {"from": "Share", "to": "Access", "type": "solid"},
+    {"from": "Access", "to": "Transform", "type": "solid"},
+    {"from": "Transform", "to": "Conceptualise", "type": "solid"},
+    {"from": "Analyse", "to": "Collect", "type": "dashed"},
+    {"from": "Store", "to": "Process", "type": "dashed"},
+    {"from": "Publish", "to": "Analyse", "type": "dashed"}
+  ]
 }
 

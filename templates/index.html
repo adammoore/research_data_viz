@@ -3,28 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Data Visualization</title>
+    <title>MaLDReTH Research Data Lifecycle</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script type="text/javascript">
-        window.layout = {{ layout | tojson | safe }};
-        window.data = {{ data | tojson | safe }};
-    </script>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="{{ url_for('static', filename='js/visualization.js') }}" defer></script>
 </head>
 <body>
-    <div id="container">
-        <h1>MaLDReTH Research Data Lifecycle</h1>
-        <div>
-            <select id="view-mode">
-                <option value="circular">Circular View</option>
-                <option value="linear">Linear View</option>
-            </select>
-            <button id="reset-view">Reset View</button>
-            <button id="expand-all">Expand All</button>
-        </div>
-        <div id="visualization"></div>
+    <h1>MaLDReTH Research Data Lifecycle</h1>
+    <div id="controls">
+        <select id="view-mode">
+            <option value="circular">Circular View</option>
+            <option value="linear">Linear View</option>
+        </select>
+        <button id="reset-view">Reset View</button>
+        <button id="expand-all">Expand All</button>
     </div>
+    <div id="explanation">
+        <p>The MaLDReTH Research Data Lifecycle visualizes the various stages involved in research data management...</p>
+        <a href="https://www.rd-alliance.org/" target="_blank">Learn more about Mapping the Research Data Landscape</a>
+    </div>
+    <div id="visualization"></div>
+
+    <!-- Include D3.js before your custom script -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Embed the layout and data into the JavaScript context -->
+    <script type="text/javascript">
+        var layout = {{ layout | tojson | safe }};
+        var data = {{ data | tojson | safe }};
+    </script>
+
+    <script src="{{ url_for('static', filename='js/visualization.js') }}"></script>
 </body>
 </html>
 
